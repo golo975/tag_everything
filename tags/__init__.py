@@ -1,3 +1,6 @@
+
+import os
+
 class TagNode(object):
     def __init__(self, name, parent):
         self.__name = name
@@ -29,6 +32,9 @@ class Tag(TagNode):
         """
         return isinstance(o, Tag) and super().__eq__(o) and super().get_name().__eq__(o.get_name())
 
+    def __hash__(self) -> int:
+        return super().__hash__()
+
 
 tag_default = Tag("default", None)
 
@@ -51,14 +57,26 @@ class Entity(object):
     def get_tags(self):
         return self.__tags
 
+    def __repr__(self) -> str:
+        return str(self.__tags)
+
 
 class EntityTagRelation(object):
     pass
 
 
-tag_test = Tag("default", None)
-entity = Entity()
-print(entity.get_tags())
+# tag_test = Tag("default", None)
+# entity = Entity()
+# print(entity.get_tags())
+#
+# entity.add_tag(tag_test)
+# print(entity.get_tags())
 
-entity.add_tag(tag_test)
-print(entity.get_tags())
+entity_list = []
+for root, dirs, files in os.walk('D:/movie'):
+    for file in files:
+        file_entity = Entity()
+        file_entity.add_tag(Tag(root, None))
+        entity_list.append(file_entity)
+
+print(entity_list)
