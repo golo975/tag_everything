@@ -9,3 +9,11 @@ for i in range(2, 101):
             print(str(i) + ' 是质数')
             break
 
+dict0 = {'name': 'Tom', 'age': 11}
+print(dict0)
+
+dict1 = dict(name='Tom', age=11)
+print(dict1)
+
+dict2 = dict(zip(['name', 'age'], ['Tom', 11]))
+print(dict2)
